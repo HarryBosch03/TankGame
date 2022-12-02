@@ -14979,7 +14979,7 @@ MonoBehaviour:
   projectileSize: 0.2
   collisionMask:
     serializedVersion: 2
-    m_Bits: 4287
+    m_Bits: 12351
   range: 15
   scaleCurve:
     serializedVersion: 2

@@ -8,6 +8,7 @@ public class EnemyBase : MonoBehaviour
     const float pathfindingDelay = 1.0f;
 
     [Space]
+    public bool pathfind = true;
     public float pathCheckDistance;
 
     [Space]
@@ -30,7 +31,7 @@ public class EnemyBase : MonoBehaviour
     private float lastPathfindTime = float.MinValue;
     private List<Vector2> path = new List<Vector2>();
 
-    public Vector2 ShootPoint { get => movement.ShootPoint; set => movement.ShootPoint = value; }
+    public Vector2 ShootPoint { get => movement ? movement.ShootPoint : Vector2.zero; set { if (movement) movement.ShootPoint = value; } }
     public Vector2 MuzzleDirection => muzzle.right;
 
     public GameObject Target
@@ -52,7 +53,7 @@ public class EnemyBase : MonoBehaviour
 
     public static HashSet<EnemyBase> Enemies { get; } = new HashSet<EnemyBase>();
 
-    private void Awake()
+    protected virtual void Awake()
     {
         movement = GetComponent<TankMovement>();
     }
@@ -82,6 +83,10 @@ public class EnemyBase : MonoBehaviour
         if (distance < 1.0f)
         {
             MoveInDirection(Vector2.zero);
+        }
+        else if (!pathfind)
+        {
+            MoveInDirection(direction);
         }
         else if (Physics2D.CircleCast(point, 1.0f, direction, distance, 1))
         {
@@ -139,7 +144,7 @@ public class EnemyBase : MonoBehaviour
         movePoint = point;
     }
 
-    private void MoveInDirection(Vector2 direction)
+    protected virtual void MoveInDirection(Vector2 direction)
     {
         if (direction.sqrMagnitude < 0.01f * 0.01f)
         {

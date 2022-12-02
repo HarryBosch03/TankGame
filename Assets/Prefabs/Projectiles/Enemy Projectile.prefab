@@ -295,11 +295,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   hitForce: 0
-  startSpeed: 10
+  startSpeed: 20
   projectileSize: 0.2
   collisionMask:
     serializedVersion: 2
-    m_Bits: 2111
+    m_Bits: 10303
   range: Infinity
   scaleCurve:
     serializedVersion: 2
