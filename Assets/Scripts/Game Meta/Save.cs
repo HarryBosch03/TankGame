@@ -15,8 +15,8 @@ public class Save : IDisposable
 
     public static Save Instance { get; private set; }
 
-    const string SavePath = "/Saves/";
-    const string SaveFileName = "main.sav";
+    public static string SavePath => "/Saves/";
+    public static string SaveFileName => $"main_v{Application.version}.sav";
 
     static Save ()
     {
