@@ -5175,6 +5175,8 @@ MonoBehaviour:
   muzzle: {fileID: 5218406402151737482}
   fireDelay: 0.05
   fullAuto: 0
+  spread: 0
+  pps: 1
   shootEventEditor:
     m_PersistentCalls:
       m_Calls: []
