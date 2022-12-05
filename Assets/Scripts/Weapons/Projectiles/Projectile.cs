@@ -50,23 +50,26 @@ public class Projectile : MonoBehaviour
         float distance = vector.magnitude;
         Vector2 direction = vector / distance;
 
-        RaycastHit2D hit = Physics2D.CircleCast(point, projectileSize, direction, distance + 0.1f);
-        if (hit)
+        var hits = Physics2D.CircleCastAll(point, projectileSize, direction, distance + 0.1f);
+        foreach (var hit in hits)
         {
             DamageArgs args = new DamageArgs(Shooter ? Shooter.gameObject : null, damage);
-            if (hit.transform.TryGetComponent(out Health health))
-            {
-                if (health == Shooter) return;
+            var health = hit.transform.GetComponentInParent<Health>();
 
-                if (damage > 0.001f)
-                {
-                    health.Damage(args);
-                }
-            }
+            if (health == Shooter) continue;
+            if (health.gameObject == gameObject) continue;
 
             if (hit.rigidbody)
             {
                 hit.rigidbody.velocity += direction * hitForce;
+            }
+
+            if (health)
+            {
+                if (damage > 0.001f)
+                {
+                    health.Damage(args);
+                }
             }
 
             if (impactFX)

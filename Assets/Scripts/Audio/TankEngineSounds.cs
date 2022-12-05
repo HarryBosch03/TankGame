@@ -1,111 +1,122 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class TankEngineSounds : MonoBehaviour
 {
-    public TankMovement movement;
+    [SerializeField] AnimationCurve[] waves;
+
+    [Space]
+    [SerializeField] float idleFrequency;
+    [SerializeField] float effortFrequency;
+
+    [Space]
+    [SerializeField] float volume;
+    [SerializeField][Range(0.0f, 10.0f)] float falloff;
+    [SerializeField][Range(0.0f, 1.0f)] float noiseAmp;
+    [SerializeField] float noiseFreq;
+    [SerializeField] int octaves;
+    [SerializeField] float laqunarity;
+    [SerializeField] float persistance;
+
+    [Space]
+    [SerializeField] float maxSpeed;
+    [SerializeField] float smoothtime;
+
     new public Rigidbody2D rigidbody;
 
-    [Space]
-    public AnimationCurve pop;
-    public int cylinders;
-    public ParticleSystem.MinMaxCurve popBaseDuration;
-
-    [Space]
-    public ParticleSystem.MinMaxCurve noiseFreq;
-    public int noiseOctaves;
-
-    [Space]
-    public float volume;
-    public float falloffOffset;
-    public float falloffExponent;
-    public ParticleSystem.MinMaxCurve volumeCurve;
-
-    [Space]
-    public float speedInfluence;
-    public float throttleInfluence;
-
-
     System.Random random;
-    float popTick;
-    float noiseTick;
-    float sampleRate;
-
     AudioListener listener;
-    Vector2 listenerPreviousPosition;
-    Vector2 listenerVelocity;
-    Vector2 listenerDirection;
+    int sampleRate;
+    float time;
 
-    float distanceToSource;
+    float effort;
+    float teffort;
+    float effortVel;
+    float expDistance;
 
-    Vector2 velocity;
-
-    private void Start()
+    private void Awake()
     {
         if (!rigidbody) rigidbody = GetComponent<Rigidbody2D>();
-        if (!movement) movement = GetComponent<TankMovement>();
         listener = FindObjectOfType<AudioListener>();
 
         sampleRate = AudioSettings.outputSampleRate;
         random = new System.Random();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        velocity = rigidbody.velocity;
-        distanceToSource = (listener.transform.position - transform.position).magnitude;
-
-        listenerVelocity = (Vector2)listener.transform.position - listenerPreviousPosition;
-        listenerPreviousPosition = listener.transform.position;
-
-        listenerDirection = (listener.transform.position - transform.position).normalized;
+        teffort = rigidbody.velocity.magnitude / maxSpeed;
+        expDistance = Mathf.Exp(-falloff * ((Vector2)(Camera.main.transform.position - transform.position)).magnitude);
     }
 
     private void OnAudioFilterRead(float[] data, int channels)
     {
-        float effort = velocity.magnitude * speedInfluence + movement.ThrottleInput * throttleInfluence;
-
         int dataLength = data.Length / channels;
         for (int i = 0; i < dataLength; i++)
         {
             float sample = 0.0f;
-            for (int c = 0; c < cylinders; c++)
+            effort = Mathf.SmoothDamp(effort, teffort, ref effortVel, smoothtime, float.MaxValue, 1.0f / sampleRate);
+            
+            foreach (var wave in waves)
             {
-                double t = popTick + c / cylinders;
-
-                float noise = SampleNoise(noiseTick);
-                sample += pop.Evaluate((float)t) * noise;
+                sample += wave.Evaluate(time);
             }
 
-            sample *= volumeCurve.Evaluate(effort) * volume * Mathf.Min(Mathf.Exp(falloffOffset - distanceToSource * falloffExponent), 1.0f);
+            sample += sample * (MultiLayerNoise(time * noiseFreq) * 2.0f - 1.0f) * noiseAmp;
 
             for (int j = 0; j < channels; j++)
             {
-                data[i * channels + j] += sample;
+                data[i * channels + j] += sample * volume * expDistance;
             }
 
-            popTick += popBaseDuration.Evaluate(effort) / sampleRate;
-            noiseTick += noiseFreq.Evaluate(effort) / sampleRate;
+            time += Mathf.Lerp(idleFrequency, effortFrequency, effort) / sampleRate;
+
+            if (float.IsNaN(time)) time = 0.0f;
+            if (time > 100.0f) time %= 100.0f;
         }
     }
 
-    private float SampleNoise (float t)
+    private float MultiLayerNoise(float t)
     {
         float val = 0.0f;
-        float max = 0.0f;
-
-        for (int i = 0; i < noiseOctaves; i++)
+        for (int i = 0; i < octaves; i++)
         {
-            float frequency = Mathf.Pow(2.0f, i);
-            float amplitude = Mathf.Pow(0.5f, i);
+            float freq = noiseFreq * Mathf.Pow(laqunarity, i);
+            float amp = noiseFreq * Mathf.Pow(persistance, i);
 
-            max += amplitude;
-            val += (Mathf.PerlinNoise(t * frequency, 0.5f) * 2.0f - 1.0f) * amplitude;
+            val += Noise(t * freq) * amp;
         }
 
-        val /= max;
-        return val;
+        return val / 2.0f * noiseAmp;
+    }
+
+    private float Noise(float t)
+    {
+        int i = (int)t;
+        float p = t - i;
+
+        float r1 = Random(i) / (float)long.MaxValue;
+        float r2 = Random(i + 1) / (float)long.MaxValue;
+
+        return r1 + (r2 - r1) * p;
+    }
+
+    public long Random (long n)
+    {
+        long n1 = 0xb5297a4d;
+        long n2 = 0x68e31da4;
+        long n3 = 0x1b56c4e9;
+
+        n *= n1;
+        n ^= n >> 8;
+        n += n2;
+        n ^= n << 8;
+        n *= n3;
+        n ^= n >> 8;
+        return n;
     }
 }

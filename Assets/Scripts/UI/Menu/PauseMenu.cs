@@ -25,6 +25,8 @@ public class PauseMenu : MenuActions
         if (menu.activeSelf) pauses++;
         else pauses--;
 
+        OpenMenu(menuContainer.GetChild(0).gameObject);
+
         UpdatePauseState();
     }
 

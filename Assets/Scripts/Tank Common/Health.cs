@@ -27,12 +27,12 @@ public class Health : MonoBehaviour
     public float CurrentHeath => currentHealth;
     public float MaxHealth => maxHealth;
 
-    public void Damage (DamageArgs args)
+    public void Damage(DamageArgs args)
     {
         if (lastDamageTime + hitInvulnerability > Time.time) return;
 
         currentHealth -= args.damage;
-        
+
         if (damagePrefab) Instantiate(damagePrefab, transform.position, Quaternion.identity);
 
         lastDamageTime = Time.time;
@@ -67,6 +67,8 @@ public class Health : MonoBehaviour
 
         foreach (var detach in detachOnDeath)
         {
+            if (!detach) continue;
+
             detach.SetParent(null);
             if (rigidbody && detach.TryGetComponent(out Rigidbody2D detachRigidbody))
             {
@@ -80,7 +82,7 @@ public class Health : MonoBehaviour
         else gameObject.SetActive(false);
     }
 
-    public void Regen (DamageArgs args)
+    public void Regen(DamageArgs args)
     {
         currentHealth = Mathf.Min(currentHealth + args.damage, MaxHealth);
     }

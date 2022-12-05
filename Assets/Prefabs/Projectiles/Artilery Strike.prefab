@@ -14871,7 +14871,7 @@ MonoBehaviour:
   range: 3
   damageMask:
     serializedVersion: 2
-    m_Bits: 6719
+    m_Bits: 14911
   rays: 64
   delay: 1.5
   fxDetach: {fileID: 8132204122576124750}

@@ -12,6 +12,10 @@ public class TankGun : MonoBehaviour, IAttack
     public bool fullAuto;
 
     [Space]
+    public float spread;
+    public int pps;
+
+    [Space]
     public UnityEvent shootEventEditor;
 
     [Space]
@@ -40,11 +44,20 @@ public class TankGun : MonoBehaviour, IAttack
         if (Time.time < nextFireTime) return;
         if (!triggerState) return;
 
-        GameObject projectileObject = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
-        if (projectileObject.TryGetComponent(out Projectile projectile))
+        for (int i = 0; i < pps; i++)
         {
-            projectile.hitEvent.AddListener(OnHitEvent);
-            projectile.Shooter = transform.GetComponentInParent<Health>();
+            float angle = 0.0f;
+            if (pps > 1)
+            {
+                angle = Mathf.Lerp(-spread, spread, i / (pps - 1.0f));
+            }
+
+            GameObject projectileObject = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation * Quaternion.Euler(0.0f, 0.0f, angle));
+            if (projectileObject.TryGetComponent(out Projectile projectile))
+            {
+                projectile.hitEvent.AddListener(OnHitEvent);
+                projectile.Shooter = transform.GetComponentInParent<Health>();
+            }
         }
 
         nextFireTime = Time.time + fireDelay;
