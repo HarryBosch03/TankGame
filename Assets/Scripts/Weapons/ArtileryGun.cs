@@ -7,6 +7,7 @@ public class ArtileryGun : MonoBehaviour, IAttack
 {
     public GameObject explosionPrefab;
     public float fireDelay;
+    public float accuracy;
     public Transform targetPoint;
     public UnityEvent fireEvent;
 
@@ -18,7 +19,8 @@ public class ArtileryGun : MonoBehaviour, IAttack
     {
         if (input > 0.5f && Time.time > lastFireTime + fireDelay)
         {
-            Instantiate(explosionPrefab, targetPoint.position, Quaternion.identity);
+            Vector2 point = (Vector2)targetPoint.position + Random.insideUnitCircle * accuracy;
+            Instantiate(explosionPrefab, point, Quaternion.identity);
 
             lastFireTime = Time.time;
 

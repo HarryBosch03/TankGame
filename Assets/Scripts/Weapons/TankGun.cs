@@ -13,6 +13,7 @@ public class TankGun : MonoBehaviour, IAttack
 
     [Space]
     public float spread;
+    public float spray;
     public int pps;
 
     [Space]
@@ -46,10 +47,10 @@ public class TankGun : MonoBehaviour, IAttack
 
         for (int i = 0; i < pps; i++)
         {
-            float angle = 0.0f;
+            float angle = Mathf.Lerp(-spray, spray, UnityEngine.Random.value);
             if (pps > 1)
             {
-                angle = Mathf.Lerp(-spread, spread, i / (pps - 1.0f));
+                angle += Mathf.Lerp(-spread, spread, i / (pps - 1.0f));
             }
 
             GameObject projectileObject = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation * Quaternion.Euler(0.0f, 0.0f, angle));

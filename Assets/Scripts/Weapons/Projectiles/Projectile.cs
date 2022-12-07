@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
             var health = hit.transform.GetComponentInParent<Health>();
 
             if (health == Shooter) continue;
-            if (health.gameObject == gameObject) continue;
+            if (health) if (health.gameObject == gameObject) continue;
 
             if (hit.rigidbody)
             {

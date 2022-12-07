@@ -52,7 +52,6 @@ public class EnemySpawner : MonoBehaviour
     {
         if (spawningNewWave) yield break;
 
-        print(enemyTeam.players.Count);
         if (enemyTeam.players.Count >= minEnemies) yield break;
 
         spawningNewWave = true;
