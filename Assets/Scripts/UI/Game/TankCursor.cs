@@ -31,4 +31,9 @@ public class TankCursor : MonoBehaviour
     {
         Cursor.visible = true;
     }
+
+    private void OnDestroy()
+    {
+        Cursor.visible = true;
+    }
 }

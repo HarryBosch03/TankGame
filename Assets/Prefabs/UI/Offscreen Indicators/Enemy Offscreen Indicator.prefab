@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e1c16e82c728b45a8826f005049763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraRectShrinkage: 1
+  cameraRectShrinkage: 4
   scaleSmoothTime: 0.2
 --- !u!1 &617574598938860860
 GameObject:

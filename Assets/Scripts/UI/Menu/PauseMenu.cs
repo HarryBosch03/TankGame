@@ -18,6 +18,7 @@ public class PauseMenu : MenuActions
         menu.SetActive(false);
     }
 
+    public void TogglePauseMenu(InputAction.CallbackContext ctx) => TogglePauseMenu();
     public void TogglePauseMenu()
     {
         menu.SetActive(!menu.activeSelf);
@@ -32,7 +33,7 @@ public class PauseMenu : MenuActions
 
     private void OnEnable()
     {
-        escapeAction.started += (ctx) => TogglePauseMenu();
+        escapeAction.started += TogglePauseMenu;
 
         escapeAction.Enable();
     }
@@ -41,13 +42,19 @@ public class PauseMenu : MenuActions
     {
         if (menu.activeSelf) TogglePauseMenu();
 
-        escapeAction.started -= (ctx) => TogglePauseMenu();
+        escapeAction.started -= TogglePauseMenu;
 
-        escapeAction.Enable();
+        escapeAction.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        escapeAction.started -= TogglePauseMenu;
     }
 
     private void UpdatePauseState()
     {
         Time.timeScale = pauses <= 0 ? 1.0f : 0.0f;
+        Cursor.visible = pauses > 0;
     }
 }

@@ -14,6 +14,7 @@ public class EnemyBase : MonoBehaviour
     [Space]
     public float angleScale = 0.05f;
     public UnityEvent[] attackEvents;
+    public bool canFireOffScreen;
 
     [Space]
     public Transform muzzle;
@@ -136,7 +137,15 @@ public class EnemyBase : MonoBehaviour
     {
         if (index < 0 || index >= attackEvents.Length) return;
 
+        if (!IsOnScreen() && !canFireOffScreen) return;
+
         attackEvents[index].Invoke();
+    }
+
+    private bool IsOnScreen()
+    {
+        var sp = Camera.main.WorldToViewportPoint(transform.position);
+        return sp.x > 0.0f && sp.x < 1.0f && sp.y > 0.0f && sp.y < 1.0f;
     }
 
     public void MoveTowards(Vector2 point)

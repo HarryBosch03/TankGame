@@ -5320,6 +5320,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  canFireOffScreen: 1
   muzzle: {fileID: 4042840801311649296}
   targetPoint: {fileID: 5347003498714416951}
   enemyTeams:
