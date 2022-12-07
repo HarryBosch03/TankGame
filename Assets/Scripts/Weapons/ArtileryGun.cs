@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Used for a delayed, non moving projectile spawning at a location.
+/// </summary>
 public class ArtileryGun : MonoBehaviour, IAttack
 {
     public GameObject explosionPrefab;
@@ -15,6 +18,10 @@ public class ArtileryGun : MonoBehaviour, IAttack
 
     public float Cooldown => throw new System.NotImplementedException();
 
+    /// <summary>
+    /// Spawns the explosion prefab at the target.
+    /// </summary>
+    /// <param name="input"></param>
     public void Shoot (float input)
     {
         if (input > 0.5f && Time.time > lastFireTime + fireDelay)

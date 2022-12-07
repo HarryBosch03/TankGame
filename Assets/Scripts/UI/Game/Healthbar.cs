@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Drives a healthbar given a health target.
+/// </summary>
 public class Healthbar : MonoBehaviour
 {
     public Health target;
@@ -41,6 +44,9 @@ public class Healthbar : MonoBehaviour
         ShakeHealthbar();
     }
 
+    /// <summary>
+    /// Updates the visuals of the fill based on the current health.
+    /// </summary>
     private void UpdateFill()
     {
         float healthPercent = target.CurrentHeath / target.MaxHealth;
@@ -51,6 +57,9 @@ public class Healthbar : MonoBehaviour
         healthText.text = $"{Mathf.RoundToInt(target.CurrentHeath)}/{Mathf.RoundToInt(target.MaxHealth)}";
     }
 
+    /// <summary>
+    /// Applys shake to the controlling ui.
+    /// </summary>
     private void ShakeHealthbar()
     {
         RectTransform transform = this.transform as RectTransform;

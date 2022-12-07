@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 
+/// <summary>
+/// Sets a tmp text text to a score.
+/// </summary>
 public class StatDisplay : MonoBehaviour
 {
     public TMPro.TMP_Text textElement;

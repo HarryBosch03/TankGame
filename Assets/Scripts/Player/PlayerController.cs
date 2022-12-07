@@ -10,6 +10,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float angleScale;
+    public bool useThumbstickAim;
 
     [Space]
     public UnityEvent<float>[] shootEvents;
@@ -63,6 +64,8 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessTouch()
     {
+        if (useThumbstickAim) return;
+
         if (aimTouch == null)
         {
             if (Touchscreen.current == null) return;
@@ -139,6 +142,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetShootDirection (Vector2 direction)
     {
+        useThumbstickAim = false;
+
         shootPoint = (Vector2)transform.position + direction;
         screenSpaceShootPoint = false;
     }
@@ -151,11 +156,15 @@ public class PlayerController : MonoBehaviour
 
     public void ShootPress ()
     {
+        if (useThumbstickAim) return;
+
         shootEvents[1].Invoke(1.0f);
     }
 
     public void ShootRelease()
     {
+        if (useThumbstickAim) return;
+
         shootEvents[1].Invoke(0.0f);
         StartCoroutine(ShootCannonMobile());
     }
@@ -166,5 +175,11 @@ public class PlayerController : MonoBehaviour
         yield return null;
         yield return null;
         shootEvents[0].Invoke(0.0f);
+    }
+
+    [ContextMenu("Give 1000 Points")]
+    public void Give1000Points()
+    {
+        ScoreCalculator.AwardCheatPoints(1000);
     }
 }

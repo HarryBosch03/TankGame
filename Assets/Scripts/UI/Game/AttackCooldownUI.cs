@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Displays the cooldown of a target weapon.
+/// </summary>
 public class AttackCooldownUI : MonoBehaviour
 {
     public GameObject target;

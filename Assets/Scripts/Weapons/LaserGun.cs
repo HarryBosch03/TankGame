@@ -29,6 +29,9 @@ public class LaserGun : MonoBehaviour
         laser.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Starts the routine for firing the big laser, includes chargeup
+    /// </summary>
     public void Shoot ()
     {
         if (!firing)

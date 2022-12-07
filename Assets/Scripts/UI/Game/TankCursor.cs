@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Used to animate and move an object as the cursor.
+/// </summary>
 public class TankCursor : MonoBehaviour
 {
     public SpriteRenderer cursor;

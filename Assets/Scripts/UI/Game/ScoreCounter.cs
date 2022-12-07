@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
+/// <summary>
+/// Class that runs the ui for the Score Counter.
+/// </summary>
 public class ScoreCounter : MonoBehaviour
 {
     [SerializeField] TMP_Text title;
@@ -52,17 +55,28 @@ public class ScoreCounter : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the title.
+    /// </summary>
     private void SetTitle()
     {
         title.text = string.Format(titleTemplate, Stats.Main.score);
         lastScoreChangeTime = Time.time;
     }
 
+    /// <summary>
+    /// Static version of DisplayInstance.
+    /// </summary>
+    /// <param name="message"></param>
     public static void Display (Message message)
     {
         DisplayEvent?.Invoke(message);
     }
 
+    /// <summary>
+    /// Displays a message in the score counter body, will fade away after a specified time.
+    /// </summary>
+    /// <param name="message"></param>
     public void DisplayInstance(Message message)
     {
         messages.Add(message);
@@ -70,6 +84,9 @@ public class ScoreCounter : MonoBehaviour
         SetBody();
     }
 
+    /// <summary>
+    /// Updates the body text of the score counter object.
+    /// </summary>
     private void SetBody()
     {
         var sb = new StringBuilder();
@@ -91,6 +108,9 @@ public class ScoreCounter : MonoBehaviour
         body.text = sb.ToString();
     }
 
+    /// <summary>
+    /// Wrapper class for holding score message related data.
+    /// </summary>
     public struct Message
     {
         public string text;

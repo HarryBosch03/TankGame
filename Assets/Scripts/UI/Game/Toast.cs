@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Controller used for displaying generic messages on screen, inspired by minecrafts /title command
+/// </summary>
 [DisallowMultipleComponent]
 public class Toast : MonoBehaviour
 {

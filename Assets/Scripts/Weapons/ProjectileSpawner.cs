@@ -9,6 +9,9 @@ public class ProjectileSpawner : MonoBehaviour
     public Transform muzzle;
     public UnityEvent fireEvent;
 
+    /// <summary>
+    /// Spawns a projectile at the muzzle.
+    /// </summary>
     public void Shoot ()
     {
         Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);

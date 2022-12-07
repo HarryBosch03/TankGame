@@ -34,12 +34,13 @@ public class EnemyConfig : EditorWindow
             }
         }
 
+        GUILayout.FlexibleSpace();
+
         if (GUILayout.Button("Deselect"))
         {
             target = null;
         }
 
-        GUILayout.FlexibleSpace();
         if (GUILayout.Button("Rename Profiles"))
         {
             foreach (var profile in profiles)
@@ -71,6 +72,7 @@ public class EnemyConfig : EditorWindow
             if (GUILayout.Button("Select Profile"))
             {
                 Selection.activeObject = target;
+                ProjectWindowUtil.ShowCreatedAsset(target);
             }
         }
         else

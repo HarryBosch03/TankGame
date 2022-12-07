@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Text;
+using UnityEngine.InputSystem;
 
 public class EndScreen : MonoBehaviour
 {
@@ -39,14 +40,14 @@ public class EndScreen : MonoBehaviour
         yield return StartCoroutine(Typewriter($"High Score: ", 0.02f, (s) => body.text = s));
 
         int highScore = Save.Get().lastMaxScore;
-        yield return StartCoroutine(Counter(highScore, 1.0f / highScore, (s) => body.text = s, body.text));
+        yield return StartCoroutine(Counter(highScore, 3.0f, (s) => body.text = s, body.text));
 
         yield return new WaitForSeconds(1.0f);
 
         yield return StartCoroutine(Typewriter($"\nFinal Score: ", 0.02f, (s) => body.text = s, body.text));
 
         int score = (int)Stats.Main.score.Value;
-        yield return StartCoroutine(Counter(score, 3.0f / score, (s) => body.text = s, body.text));
+        yield return StartCoroutine(Counter(score, 3.0f, (s) => body.text = s, body.text));
 
         if (score >= highScore)
         {
@@ -73,18 +74,29 @@ public class EndScreen : MonoBehaviour
             if (text[i] == '>') tag = false;
 
             if (!tag) yield return new WaitForSeconds(characterTime);
+
+            if (Keyboard.current != null) if (Keyboard.current.escapeKey.wasReleasedThisFrame) break; 
         }
 
         callback(sb.ToString());
     }
 
-    private IEnumerator Counter(int target, float characterTime, System.Action<string> callback, string prefix = "")
+    private IEnumerator Counter(int target, float totalTime, System.Action<string> callback, string prefix = "")
     {
-        for (int i = 0; i < target; i++)
-        {
-            callback(prefix + i.ToString());
+        float percent = 0.0f;
 
-            yield return new WaitForSeconds(Mathf.Pow(1.05f, -i) * characterTime);
+        while (percent < 1.0f)
+        {
+            float slope = 1.0f / 3.0f;
+            float t = Mathf.Pow(percent, slope);
+
+            callback(prefix + Mathf.Round(target * t).ToString());
+
+            percent += Time.deltaTime / totalTime;
+
+            if (Keyboard.current != null) if (Keyboard.current.escapeKey.wasReleasedThisFrame) break;
+
+            yield return null;
         }
 
         callback(prefix + target.ToString());

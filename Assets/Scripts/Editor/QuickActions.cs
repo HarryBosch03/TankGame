@@ -17,6 +17,10 @@ public class QuickActions : EditorWindow
     Texture2D iconBG;
     Texture2D iconFG;
 
+    static bool windows;
+    static bool webgl;
+    static bool android;
+
     private void OnGUI()
     {
         if (GUILayout.Button("Build All"))
@@ -36,6 +40,14 @@ public class QuickActions : EditorWindow
                 BuildAllAndPush();
             }
         }
+
+        EditorGUILayout.BeginHorizontal();
+
+        windows = GUILayout.Toggle(windows, "Build Windows");
+        webgl = GUILayout.Toggle(webgl, "Build WebGL");
+        android = GUILayout.Toggle(android, "Build Android");
+
+        EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.Space();
 
@@ -57,6 +69,7 @@ public class QuickActions : EditorWindow
         var compositeIcons = new Vector2Int[]
         {
             new Vector2Int(432, 432),
+            new Vector2Int(1024, 1024),
         };
 
         var staticIcons = new Vector2Int[]
@@ -120,16 +133,29 @@ public class QuickActions : EditorWindow
             BuildAll();
         }
 
-        var butlerCommand = $"/C c:/butler/butler.exe push \"Builds/Windows\" boschdog03/ammoracked:win --userversion {Application.version}";
-        System.Diagnostics.Process.Start("CMD.exe", butlerCommand);
+        if (windows)
+        {
+            var butlerCommand = $"/C c:/butler/butler.exe push \"Builds/Windows\" boschdog03/ammoracked:win --userversion {Application.version}";
+            System.Diagnostics.Process.Start("CMD.exe", butlerCommand);
+        }
 
-        butlerCommand = $"/C c:/butler/butler.exe push \"Builds/WebGL\" boschdog03/ammoracked:html5 --userversion {Application.version}";
-        System.Diagnostics.Process.Start("CMD.exe", butlerCommand);
+        if (webgl)
+        {
+            var butlerCommand = $"/C c:/butler/butler.exe push \"Builds/WebGL\" boschdog03/ammoracked:html5 --userversion {Application.version}";
+            System.Diagnostics.Process.Start("CMD.exe", butlerCommand);
+        }
+
+        if (android)
+        {
+            var butlerCommand = $"/C c:/butler/butler.exe push \"Builds/Android/ammoracked -v{Application.version}.apk\" boschdog03/ammoracked:android --userversion {Application.version}";
+            System.Diagnostics.Process.Start("CMD.exe", butlerCommand);
+        }
     }
 
     private static void BuildAll()
     {
-        BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, "Builds/Windows/Ammoracked.exe", BuildTarget.StandaloneWindows, BuildOptions.None);
-        BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, "Builds/WebGL", BuildTarget.WebGL, BuildOptions.None);
+        if (windows) BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, "Builds/Windows/Ammoracked.exe", BuildTarget.StandaloneWindows, BuildOptions.None);
+        if (webgl) BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, "Builds/WebGL", BuildTarget.WebGL, BuildOptions.None);
+        if (android) BuildPipeline.BuildPlayer(EditorBuildSettings.scenes, $"Builds/Android/ammoracked -v{Application.version}.apk", BuildTarget.Android, BuildOptions.None);
     }
 }

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Helper script that causes an attached particle systems particles to inherit their parents rotation.
+/// </summary>
 [ExecuteAlways]
 public class ParticlesInheritRotation : MonoBehaviour
 {

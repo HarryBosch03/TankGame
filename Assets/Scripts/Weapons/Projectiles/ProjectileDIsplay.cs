@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileDIsplay : MonoBehaviour
+public class ProjectileDisplay : MonoBehaviour
 {
     [SerializeField] SpriteRenderer sprite;
     [SerializeField] float scaleFrequency;

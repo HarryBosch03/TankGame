@@ -5717,7 +5717,7 @@ GameObject:
   - component: {fileID: 8926955457371148105}
   - component: {fileID: 5674899277741082652}
   m_Layer: 12
-  m_Name: CT
+  m_Name: Base Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5815,6 +5815,9 @@ MonoBehaviour:
   muzzle: {fileID: 8348006079517818226}
   fireDelay: 1.5
   fullAuto: 0
+  spread: 0
+  spray: 0
+  pps: 1
   shootEventEditor:
     m_PersistentCalls:
       m_Calls:
@@ -5868,6 +5871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d943725995f04645b411fdc9ed77263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathfind: 1
   pathCheckDistance: 2
   angleScale: 0.05
   attackEvents:
@@ -5885,6 +5889,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  canFireOffScreen: 0
   muzzle: {fileID: 8348006079517818226}
   targetPoint: {fileID: 4844635847054117354}
   enemyTeams:
@@ -5940,180 +5945,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e55c1a1f5cff54ab49dbe4b9d9da9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 0}
-  rigidbody: {fileID: 0}
-  pop:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.51615435
-      value: -0.2094316
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.8664422
-      value: 0.9439313
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
-  cylinders: 4
-  popBaseDuration:
-    m_Mode: 1
-    m_CurveMultiplier: 1
-    m_CurveMin:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 18
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 10
-        value: 60
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_CurveMax:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 18
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 10
-        value: 40
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ConstantMin: 0
-    m_ConstantMax: 0
-  noiseFreq:
-    m_Mode: 1
-    m_CurveMultiplier: 1
-    m_CurveMin:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_CurveMax:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 125
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 10
-        value: 175
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ConstantMin: 0
-    m_ConstantMax: 200
-  noiseOctaves: 8
+  waves: []
+  idleFrequency: 0
+  effortFrequency: 0
   volume: 0.4
-  falloffOffset: 5
-  falloffExponent: 0.5
-  volumeCurve:
-    m_Mode: 1
-    m_CurveMultiplier: 0.75
-    m_CurveMin:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_CurveMax:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.6
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    m_ConstantMin: 0
-    m_ConstantMax: 0
-  speedInfluence: 0.6
-  throttleInfluence: 3
+  falloff: 0
+  noiseAmp: 0
+  noiseFreq: 0
+  octaves: 0
+  laqunarity: 0
+  persistance: 0
+  maxSpeed: 0
+  smoothtime: 0
+  rigidbody: {fileID: 0}
 --- !u!82 &5674899277741082652
 AudioSource:
   m_ObjectHideFlags: 0

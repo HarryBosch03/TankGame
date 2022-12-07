@@ -1,7 +1,14 @@
 using UnityEngine;
 
+/// <summary>
+/// Libary of helper functions made by yours truly <3.
+/// </summary>
 public static class Util
 {
+    /// <summary></summary>
+    /// <param name="spawnRange">The range to look</param>
+    /// <param name="spawnCheckRadius">The size of box to use for collision checking</param>
+    /// <returns>Returns a Spawn Location within a specified range</returns>
     public static Vector2 GetSpawnLocation(float spawnRange, float spawnCheckRadius)
     {
         Vector2 spawnLocation;

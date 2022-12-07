@@ -343,7 +343,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 178.1
+  m_fontSize: 370.6
   m_fontSizeBase: 400
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -502,6 +502,7 @@ MonoBehaviour:
   menuContainer: {fileID: 4770124683409884468}
   LoadingIcon: {fileID: 5315390133389472448}
   menu: {fileID: 1527755532095849313}
+  allPlayersDeadSignal: {fileID: 11400000, guid: 5024e5eba6872034392ea3a41efd3fb3, type: 2}
 --- !u!1 &4241381454471823906
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,13 +1120,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Options
       objectReference: {fileID: 0}
+    - target: {fileID: 6736440094333055049, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
+      propertyPath: m_fontSize
+      value: 151.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6736440095104430957, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_text
       value: Options
       objectReference: {fileID: 0}
     - target: {fileID: 6736440095104430957, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 129.9
       objectReference: {fileID: 0}
     - target: {fileID: 6736440096005352076, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_Pivot.x
@@ -1369,7 +1374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6736440094333055049, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 151.9
       objectReference: {fileID: 0}
     - target: {fileID: 6736440095104430957, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_text
@@ -1377,7 +1382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6736440095104430957, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 129.9
       objectReference: {fileID: 0}
     - target: {fileID: 6736440096005352076, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_Pivot.x
@@ -1513,13 +1518,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Quit
       objectReference: {fileID: 0}
+    - target: {fileID: 6736440094333055049, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
+      propertyPath: m_fontSize
+      value: 151.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6736440095104430957, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_text
       value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 6736440095104430957, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_fontSize
-      value: 18
+      value: 129.9
       objectReference: {fileID: 0}
     - target: {fileID: 6736440096005352076, guid: 27c593c8baf01494fa59f73a869a2e83, type: 3}
       propertyPath: m_Pivot.x

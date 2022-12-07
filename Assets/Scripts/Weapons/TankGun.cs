@@ -42,6 +42,14 @@ public class TankGun : MonoBehaviour, IAttack
 
     private void Update()
     {
+        ProcessShoot();
+    }
+
+    /// <summary>
+    /// Performs the logic for firing projectiles if an input is given.
+    /// </summary>
+    private void ProcessShoot()
+    {
         if (Time.time < nextFireTime) return;
         if (!triggerState) return;
 
@@ -78,11 +86,20 @@ public class TankGun : MonoBehaviour, IAttack
         }
     }
 
+    /// <summary>
+    /// Set the trigger state of the weapon.
+    /// </summary>
+    /// <param name="inputValue"></param>
     public void Shoot(float inputValue)
     {
         triggerState = inputValue > 0.5f;
     }
 
+    /// <summary>
+    /// Callback for when a projectile spawned by this weapon hits something.
+    /// </summary>
+    /// <param name="hitObject"></param>
+    /// <param name="args"></param>
     public void OnHitEvent (GameObject hitObject, DamageArgs args)
     {
         HitEvent?.Invoke(hitObject, args);

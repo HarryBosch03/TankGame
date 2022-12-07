@@ -20,6 +20,10 @@ public class ArtileryStrike : MonoBehaviour
         StartCoroutine(Explosion());
     }
 
+    /// <summary>
+    /// Deals explosion damage after a short delay.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Explosion()
     {
         yield return new WaitForSeconds(delay);

@@ -4,7 +4,11 @@ using UnityEngine;
 
 public static class ScoreCalculator
 {
-    public static void CalculateScore (Health hitObject)
+    /// <summary>
+    /// Awards points for an enemy Kill.
+    /// </summary>
+    /// <param name="hitObject"></param>
+    public static void AwardKillPoints(Health hitObject)
     {
         if (hitObject)
         {
@@ -12,5 +16,15 @@ public static class ScoreCalculator
             Stats.Main.score.Value += value;
             ScoreCounter.Display($"Kill\t+{value}");
         }
+    }
+
+    /// <summary>
+    /// Awards points gained through developer actions.
+    /// </summary>
+    /// <param name="value"></param>
+    public static void AwardCheatPoints(int value)
+    {
+        Stats.Main.score.Value += value;
+        ScoreCounter.Display($"Cheated\t+{value}");
     }
 }

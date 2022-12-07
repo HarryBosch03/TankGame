@@ -45,12 +45,24 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ProcessHitDetection();
+
+        ProcessLifecycle();
+
+        previousPosition = rigidbody.position;
+    }
+
+    /// <summary>
+    /// Logic for processing hit detection, should be called in FixedUpdate
+    /// </summary>
+    private void ProcessHitDetection()
+    {
         Vector2 point = previousPosition;
         Vector2 vector = rigidbody.position + rigidbody.velocity * Time.deltaTime - previousPosition;
         float distance = vector.magnitude;
         Vector2 direction = vector / distance;
 
-        var hits = Physics2D.CircleCastAll(point, projectileSize, direction, distance + 0.1f);
+        var hits = Physics2D.CircleCastAll(point, projectileSize, direction, distance + 0.1f, collisionMask);
         foreach (var hit in hits)
         {
             DamageArgs args = new DamageArgs(Shooter ? Shooter.gameObject : null, damage);
@@ -80,7 +92,14 @@ public class Projectile : MonoBehaviour
             }
             Destroy(gameObject);
         }
+    }
 
+
+    /// <summary>
+    /// Processes Projectiles age, should be called in Update
+    /// </summary>
+    private void ProcessLifecycle()
+    {
         age += Time.deltaTime;
         if (age > range / startSpeed)
         {
@@ -97,7 +116,5 @@ public class Projectile : MonoBehaviour
             transform.localScale = Vector3.one * scaleCurve.Evaluate(startSpeed * age / range);
             shadow.Offset = Vector2.down * shadowDistance.Evaluate(startSpeed * age / range);
         }
-
-        previousPosition = rigidbody.position;
     }
 }

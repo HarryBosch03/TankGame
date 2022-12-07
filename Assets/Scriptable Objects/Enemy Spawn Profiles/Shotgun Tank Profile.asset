@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3921b177603219a4991b892902933f10, type: 3}
+  m_Name: Shotgun Tank Profile
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8391413768875140868, guid: 61e12bdfcbf11aa47942df74c91ebed3, type: 3}
+  weight: 0.6
+  minTime: 240
+  ignore: 0

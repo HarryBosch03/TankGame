@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controller for the heads that pop up when an object of interest is off the screen.
+/// </summary>
 public class OffscreenIndicator : MonoBehaviour
 {
     public float cameraRectShrinkage;

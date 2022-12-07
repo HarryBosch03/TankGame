@@ -19,6 +19,9 @@ public class EnemySpawner : MonoBehaviour
     public Team enemyTeam;
     public Signal enemyDiedEvent;
 
+    [Space]
+    [SerializeField] EnemySpawnProfile[] spawnProfiles;
+
     bool spawningNewWave;
 
     float time;
@@ -68,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
 
     private GameObject GetRandomEnemy()
     {
-        return EnemySpawnProfile.WeightedProfiles.Where(p => time > p.element.MinTime).Evaluate(Random.value).Prefab;
+        return spawnProfiles.Where(p => time > p.MinTime).GetWeightedElement(e => e.Weight, Random.value).Prefab;
     }
 
     private void OnDrawGizmosSelected()

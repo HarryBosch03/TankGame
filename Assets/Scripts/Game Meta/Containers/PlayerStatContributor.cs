@@ -44,7 +44,7 @@ public class PlayerStatContributor : MonoBehaviour
             if (health.currentHealth <= 0)
             {
                 Stats.Main.tanksDestroyed.Value++;
-                ScoreCalculator.CalculateScore(health);
+                ScoreCalculator.AwardKillPoints(health);
             }
         }
     }
