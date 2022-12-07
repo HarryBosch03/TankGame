@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 [CreateAssetMenu(menuName = "Scriptable Objects/Audio/Soundbite")]
 public class Soundbite : ScriptableObject
@@ -6,6 +7,7 @@ public class Soundbite : ScriptableObject
     public AudioClip clip;
     public ParticleSystem.MinMaxCurve pitch = new ParticleSystem.MinMaxCurve(1.0f);
     public ParticleSystem.MinMaxCurve volume = new ParticleSystem.MinMaxCurve(1.0f);
+    public AudioMixerGroup audioGroup;
 
     public void PlaySound ()
     {
@@ -21,6 +23,7 @@ public class Soundbite : ScriptableObject
         player.clip = clip;
         player.pitch = pitch.Evaluate(Random.value);
         player.volume = volume.Evaluate(Random.value);
+        player.outputAudioMixerGroup = audioGroup;
 
         player.Play();
     }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class Extensions
@@ -8,7 +9,7 @@ public static class Extensions
         return new Vector2(Mathf.Clamp(point.x, rect.xMin, rect.xMax), Mathf.Clamp(point.y, rect.yMin, rect.yMax));
     }
 
-    public static T Evaluate<T>(this IList<WeightedElement<T>> list)
+    public static T Evaluate<T>(this IEnumerable<WeightedElement<T>> list, float selWeight)
     {
         float totalWeight = 0.0f;
         foreach (var element in list)
@@ -16,16 +17,18 @@ public static class Extensions
             totalWeight += element.weight;
         }
 
-        float selectWeight = Random.value * totalWeight;
+        T last = default;
         foreach (var element in list)
         {
-            if (selectWeight <= element.weight)
+            last = element.element;
+
+            if (selWeight <= element.weight)
             {
                 return element.element;
             }
-            selectWeight -= element.weight;
+            selWeight -= element.weight;
         }
 
-        return list[list.Count - 1].element;
+        return last;
     }
 }

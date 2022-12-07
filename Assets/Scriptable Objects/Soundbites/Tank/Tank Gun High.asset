@@ -83,3 +83,4 @@ MonoBehaviour:
       m_RotationOrder: 4
     m_ConstantMin: 0
     m_ConstantMax: 1
+  audioGroup: {fileID: 1490878527728918946, guid: 43bb4938c7f578b409ef8bd7c248036e, type: 2}

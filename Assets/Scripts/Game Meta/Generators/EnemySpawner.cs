@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     public Spawner spawnerPrefab;
-    public List<WeightedElement<EnemyBase>> enemies;
     public float spawnRange;
     public float spawnCheckRange;
 
@@ -20,10 +19,6 @@ public class EnemySpawner : MonoBehaviour
     public Team enemyTeam;
     public Signal enemyDiedEvent;
 
-    float gameDuration;
-    float nextSpawnTime;
-
-    bool killedDummyTanks = false;
     bool spawningNewWave;
 
     float time;
@@ -63,12 +58,17 @@ public class EnemySpawner : MonoBehaviour
         {
             Vector2 spawnLocation = Util.GetSpawnLocation(spawnRange, spawnCheckRange);
             var spawner = Instantiate(spawnerPrefab, spawnLocation, Quaternion.identity);
-            spawner.spawnObject = enemies.Evaluate().gameObject;
+            spawner.spawnObject = GetRandomEnemy();
 
             yield return new WaitForSeconds(1.0f);
         }
 
         spawningNewWave = false;
+    }
+
+    private GameObject GetRandomEnemy()
+    {
+        return EnemySpawnProfile.WeightedProfiles.Where(p => time > p.element.MinTime).Evaluate(Random.value).Prefab;
     }
 
     private void OnDrawGizmosSelected()

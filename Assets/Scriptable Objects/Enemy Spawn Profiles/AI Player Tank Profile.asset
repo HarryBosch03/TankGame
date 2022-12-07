@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3921b177603219a4991b892902933f10, type: 3}
+  m_Name: AI Player Tank Profile
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4336552567960089746, guid: 8693e218544e6da4cb416a9f512e59b3, type: 3}
+  weight: 0
+  minTime: 0
+  ignore: 0
