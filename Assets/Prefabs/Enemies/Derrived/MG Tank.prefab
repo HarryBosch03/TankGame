@@ -15,6 +15,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.39613748
       objectReference: {fileID: 0}
+    - target: {fileID: 8348006078778849709, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
+      propertyPath: offset.y
+      value: -0.02777791
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348006078778849710, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02777791
+      objectReference: {fileID: 0}
     - target: {fileID: 8348006079442710925, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
       propertyPath: m_Color.g
       value: 1
@@ -22,6 +30,14 @@ PrefabInstance:
     - target: {fileID: 8348006079442710925, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
       propertyPath: m_Color.r
       value: 0.39613748
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348006079943087433, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
+      propertyPath: offset.y
+      value: -0.02777791
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348006079943087434, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02777791
       objectReference: {fileID: 0}
     - target: {fileID: 8348006080250415251, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
       propertyPath: maxHealth
@@ -89,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8348006080250415466, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
       propertyPath: m_Name
-      value: MGT
+      value: MG Tank
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}

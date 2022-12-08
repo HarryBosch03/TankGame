@@ -30,6 +30,8 @@ public static class Extensions
             totalWeight += element.weight;
         }
 
+        selWeight *= totalWeight;
+
         T last = default;
         foreach (var element in list)
         {
@@ -60,6 +62,8 @@ public static class Extensions
         {
             totalWeight += getWeight(element);
         }
+
+        selWeight *= totalWeight;
 
         T last = default;
         foreach (var element in list)

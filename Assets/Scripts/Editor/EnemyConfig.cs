@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
@@ -80,27 +81,28 @@ public class EnemyConfig : EditorWindow
             float maxTime = 0.0f;
             foreach (var profile in profiles)
             {
-                maxTime = Mathf.Max(maxTime, profile.MinTime);
+                AnimationCurve weightCurve = (AnimationCurve)typeof(EnemySpawnProfile).GetField("weight", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(profile);
+                maxTime = Mathf.Max(maxTime, weightCurve.keys[weightCurve.keys.Length - 1].time);
             }
 
             timeSlice = EditorGUILayout.Slider("Time Slice", timeSlice, 0.0f, maxTime);
 
             var rect = EditorGUILayout.GetControlRect(GUILayout.ExpandHeight(true));
-            var validProfiles = profiles.Where(p => p.MinTime <= timeSlice).OrderBy(p => p.MinTime).ToArray();
 
             float totalWeight = 0.0f;
-            foreach (var profile in validProfiles)
+            foreach (var profile in profiles)
             {
-                totalWeight += profile.Weight;
+                totalWeight += profile.GetWeight(timeSlice);
             }
 
             float offset = 0.0f;
-            foreach (var profile in validProfiles)
+            int i = 0;
+            foreach (var profile in profiles)
             {
-                float percent = profile.Weight / totalWeight;
+                float percent = profile.GetWeight(timeSlice) / totalWeight;
                 float height = percent * rect.height;
 
-                var col = Color.HSVToRGB(Mathf.Abs(profile.name.GetHashCode() / 1000.0f) % 1.0f, 0.8f, 0.9f);
+                var col = Color.HSVToRGB(i++ / (float)profiles.Count, 0.8f, 0.9f);
                 Rect localRect = new Rect(rect.x, rect.y + offset, rect.width, height);
                 EditorGUI.DrawRect(localRect, col);
                 if (percent > 0.01f) EditorGUI.LabelField(localRect, profile.name, new GUIStyle { normal = new GUIStyleState { textColor = Color.black }, alignment = TextAnchor.MiddleCenter });
@@ -156,8 +158,7 @@ public class EnemyConfig : EditorWindow
 
             var profile = CreateInstance<EnemySpawnProfile>();
             profile.Prefab = enemy;
-            profile.Weight = 1.0f;
-            profile.MinTime = 0.0f;
+            profile.GetType().GetField("weight", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(profile, AnimationCurve.Linear(0.0f, 0.0f, 1.0f, 0.0f));
 
             AssetDatabase.CreateAsset(profile, $"Assets/Scriptable Objects/Enemy Spawn Profiles/{enemy.name} Profile.asset");
         }

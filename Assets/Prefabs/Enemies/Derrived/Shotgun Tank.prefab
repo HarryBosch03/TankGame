@@ -31,6 +31,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8348006080250415251, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
+      propertyPath: maxHealth
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348006080250415251, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
+      propertyPath: currentHealth
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8348006080250415252, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -89,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8348006080250415466, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}
       propertyPath: m_Name
-      value: ST
+      value: Shotgun Tank
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40548a22bbc7f654cbdae15030f97601, type: 3}

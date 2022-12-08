@@ -13,6 +13,36 @@ MonoBehaviour:
   m_Name: Shotgun Tank Profile
   m_EditorClassIdentifier: 
   prefab: {fileID: 8391413768875140868, guid: 61e12bdfcbf11aa47942df74c91ebed3, type: 3}
-  weight: 0.6
-  minTime: 240
-  ignore: 0
+  weight:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 120
+      value: 0
+      inSlope: 0.0050000004
+      outSlope: 0.0050000004
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 180
+      value: 0.3
+      inSlope: 0.0050000004
+      outSlope: 0.01
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 250
+      value: 1
+      inSlope: 0.01
+      outSlope: 0.01
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -299,7 +299,7 @@ MonoBehaviour:
   projectileSize: 0.2
   collisionMask:
     serializedVersion: 2
-    m_Bits: 22591
+    m_Bits: 30783
   range: Infinity
   scaleCurve:
     serializedVersion: 2

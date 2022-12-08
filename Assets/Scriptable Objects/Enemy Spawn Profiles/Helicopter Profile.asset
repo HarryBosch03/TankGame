@@ -13,6 +13,27 @@ MonoBehaviour:
   m_Name: Helicopter Profile
   m_EditorClassIdentifier: 
   prefab: {fileID: 3350370355462005258, guid: a11cb5ccddc9c76449b8b8b4aee8ee20, type: 3}
-  weight: 0.3
-  minTime: 720
-  ignore: 0
+  weight:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 240
+      value: 0
+      inSlope: 0.013333334
+      outSlope: 0.013333334
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 300
+      value: 0.8
+      inSlope: 0.013333334
+      outSlope: 0.013333334
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

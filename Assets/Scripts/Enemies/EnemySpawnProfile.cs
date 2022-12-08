@@ -5,10 +5,9 @@ using UnityEngine;
 public class EnemySpawnProfile : ScriptableObject
 {
     [SerializeField] GameObject prefab;
-    [SerializeField] float weight;
-    [SerializeField][EditorTime] float minTime;
+    [SerializeField] AnimationCurve weight;
 
     public GameObject Prefab { get => prefab; set => prefab = value; }
-    public float Weight { get => weight; set => weight = value; }
-    public float MinTime { get => minTime; set => minTime = value; }
+
+    public float GetWeight(float gameTimeSecconds) => weight.Evaluate(gameTimeSecconds);
 }

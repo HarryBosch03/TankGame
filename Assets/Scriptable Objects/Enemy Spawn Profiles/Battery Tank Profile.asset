@@ -13,6 +13,27 @@ MonoBehaviour:
   m_Name: Battery Tank Profile
   m_EditorClassIdentifier: 
   prefab: {fileID: 4042840800042129928, guid: 9b9652fe1236a10488de3d362a81099b, type: 3}
-  weight: 0.2
-  minTime: 480
-  ignore: 0
+  weight:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 120
+      value: 0
+      inSlope: 0.0033333334
+      outSlope: 0.0033333334
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 180
+      value: 0.2
+      inSlope: 0.0033333334
+      outSlope: 0.0033333334
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

@@ -13,7 +13,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 491310159430204696, guid: 3ed6afcd2833ac3418d9677376726f20, type: 3}
       propertyPath: startSpeed
-      value: 100
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 491310159430204696, guid: 3ed6afcd2833ac3418d9677376726f20, type: 3}
+      propertyPath: collisionMask.m_Bits
+      value: 30783
       objectReference: {fileID: 0}
     - target: {fileID: 5059868713048127733, guid: 3ed6afcd2833ac3418d9677376726f20, type: 3}
       propertyPath: m_Sprite
