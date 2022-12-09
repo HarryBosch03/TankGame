@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public static class Extensions
@@ -78,5 +80,16 @@ public static class Extensions
         }
 
         return last;
+    }
+
+    public static void ExecuteDelayed (this MonoBehaviour ctx, System.Action callback, float delaySecconds)
+    {
+        ctx.StartCoroutine(ExecuteDelayedRoutine(callback, delaySecconds));
+    }
+
+    static IEnumerator ExecuteDelayedRoutine (System.Action callback, float delaySecconds)
+    {
+        yield return new WaitForSeconds(delaySecconds);
+        callback?.Invoke();
     }
 }

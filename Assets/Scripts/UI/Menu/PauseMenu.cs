@@ -13,6 +13,10 @@ public class PauseMenu : MenuActions
     [SerializeField] Signal allPlayersDeadSignal;
 
     static int pauses;
+    public static bool Paused => pauses > 0;
+    public static event System.Action<bool> PauseChangedEvent;
+    public static event System.Action PauseEvent;
+    public static event System.Action ResumeEvent;
 
     InputAction escapeAction;
 
@@ -80,7 +84,9 @@ public class PauseMenu : MenuActions
 
     private void UpdatePauseState()
     {
-        Time.timeScale = pauses <= 0 ? 1.0f : 0.0f;
-        Cursor.visible = pauses > 0;
+        Time.timeScale = Paused ? 0.0f : 1.0f;
+        PauseChangedEvent?.Invoke(Paused);
+        if (Paused) PauseEvent?.Invoke();
+        else ResumeEvent?.Invoke();
     }
 }

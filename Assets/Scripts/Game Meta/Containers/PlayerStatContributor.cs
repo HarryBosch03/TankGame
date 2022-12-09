@@ -10,13 +10,13 @@ public class PlayerStatContributor : MonoBehaviour
 
     private void OnEnable()
     {
-        mainGun.ShootEvent += OnShootEvent;
+        mainGun.AttackEvent += OnAttackEvent;
         mainGun.HitEvent += OnHitEvent;
     }
 
     private void OnDisable()
     {
-        mainGun.ShootEvent -= OnShootEvent;
+        mainGun.AttackEvent -= OnAttackEvent;
         mainGun.HitEvent -= OnHitEvent;
     }
 
@@ -30,7 +30,7 @@ public class PlayerStatContributor : MonoBehaviour
         Stats.Main.timeAlive.Value = Time.time - startTime;
     }
 
-    private void OnShootEvent()
+    private void OnAttackEvent()
     {
         Stats.Main.shotsFired.Value++;
     }

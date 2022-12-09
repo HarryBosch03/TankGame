@@ -6,4 +6,6 @@ using UnityEngine;
 public interface IAttack
 {
     float Cooldown { get; }
+    event System.Action AttackEvent;
+    event System.Action CooldownFinishedEvent;
 }

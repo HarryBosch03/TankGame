@@ -28,8 +28,9 @@ public class TankGun : MonoBehaviour, IAttack
     float nextFireTime;
     bool triggerState;
 
-    public event System.Action ShootEvent;
     public event System.Action<GameObject, DamageArgs> HitEvent;
+    public event Action AttackEvent;
+    public event Action CooldownFinishedEvent;
 
     public float FireDelay => fireDelay;
     public float NextFireTime => nextFireTime;
@@ -71,8 +72,10 @@ public class TankGun : MonoBehaviour, IAttack
 
         nextFireTime = Time.time + fireDelay;
 
-        ShootEvent?.Invoke();
         shootEventEditor?.Invoke();
+        AttackEvent?.Invoke();
+
+        this.ExecuteDelayed(CooldownFinishedEvent, fireDelay);
 
         if (!fullAuto) triggerState = false;
     }

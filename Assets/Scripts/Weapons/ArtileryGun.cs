@@ -16,7 +16,10 @@ public class ArtileryGun : MonoBehaviour, IAttack
 
     float lastFireTime;
 
-    public float Cooldown => throw new System.NotImplementedException();
+    public float Cooldown => (Time.time - lastFireTime) / fireDelay;
+
+    public event System.Action AttackEvent;
+    public event System.Action CooldownFinishedEvent;
 
     /// <summary>
     /// Spawns the explosion prefab at the target.
@@ -32,6 +35,9 @@ public class ArtileryGun : MonoBehaviour, IAttack
             lastFireTime = Time.time;
 
             fireEvent?.Invoke();
+            AttackEvent?.Invoke();
+
+            this.ExecuteDelayed(CooldownFinishedEvent.Invoke, fireDelay);
         }
     }
 }
